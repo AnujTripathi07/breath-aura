@@ -1,12 +1,48 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { CustomCursor } from '@/components/CustomCursor';
+import { Starfield } from '@/components/Starfield';
+import { Navbar } from '@/components/Navbar';
+import { HeroSection } from '@/components/HeroSection';
+import { PollutantCards } from '@/components/PollutantCards';
+import { CityComparison } from '@/components/CityComparison';
+import { MapAndTrends } from '@/components/MapAndTrends';
+import { Footer } from '@/components/Footer';
+import { LiveAQIModal } from '@/components/LiveAQIModal';
+import { StoriesModal } from '@/components/StoriesModal';
+import { ForecastModal } from '@/components/ForecastModal';
 
 const Index = () => {
+  const [liveAQIOpen, setLiveAQIOpen] = useState(false);
+  const [storiesOpen, setStoriesOpen] = useState(false);
+  const [forecastOpen, setForecastOpen] = useState(false);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="relative min-h-screen">
+      {/* Effects */}
+      <CustomCursor />
+      <Starfield />
+
+      {/* Main Content */}
+      <Navbar
+        onLiveAQIClick={() => setLiveAQIOpen(true)}
+        onHealthAlertsClick={() => setLiveAQIOpen(true)}
+        onStoriesClick={() => setStoriesOpen(true)}
+        onForecastClick={() => setForecastOpen(true)}
+      />
+      
+      <main className="relative z-10">
+        <HeroSection />
+        <PollutantCards />
+        <CityComparison />
+        <MapAndTrends />
+      </main>
+
+      <Footer />
+
+      {/* Modals */}
+      <LiveAQIModal open={liveAQIOpen} onOpenChange={setLiveAQIOpen} />
+      <StoriesModal open={storiesOpen} onOpenChange={setStoriesOpen} />
+      <ForecastModal open={forecastOpen} onOpenChange={setForecastOpen} />
     </div>
   );
 };
